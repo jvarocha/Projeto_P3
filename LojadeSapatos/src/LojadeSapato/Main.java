@@ -7,7 +7,7 @@ public class Main {
 	static Scanner teclado = new Scanner(System.in);
 	static String funcionalidades;
 	private static Loja loja = new Loja();
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("Acessar Conta || Criar Usuário");
 		funcionalidades = teclado.nextLine();
@@ -18,7 +18,7 @@ public class Main {
 				}
 			}
 			if(funcionalidades.equalsIgnoreCase("Criar Usuario")) {
-				Funcionario novofuncionario = new Funcionario();
+				loja.funcionarios.add(new Funcionario());
 				operaçoes();
 			}
 			System.out.println("Acessar Conta || Criar Usuário || Fechar");
@@ -27,57 +27,50 @@ public class Main {
 	}
 	
 	public static void operaçoes() {
-		System.out.println("Entrada de Produto || Saida de Produto || Consulta Produto || Realizar Venda || Relatório || Alterar Dados");
-		funcionalidades = teclado.nextLine();
-		if(funcionalidades.equalsIgnoreCase("Entrada de Produto")) {
-			System.out.println("Novo || Existente");
+		while(funcionalidades.equalsIgnoreCase("voltar") != true) {
+			
+			System.out.println("Entrada de Produto || Perda de Produto || Consultar Produto || Realizar Venda || Relatório || Alterar Dados");
 			funcionalidades = teclado.nextLine();
-			if(funcionalidades.equalsIgnoreCase("Novo")) {
-				Produto novoproduto = new Produto();
-				loja.produtos.add(novoproduto);
-			}
-			else if(funcionalidades.equalsIgnoreCase("Existente")) {
-				if(loja.buscaproduto() != null) {
-					
+			if(funcionalidades.equalsIgnoreCase("Entrada de Produto")) {
+				
+				System.out.println("Novo || Existente");
+				funcionalidades = teclado.nextLine();
+				if(funcionalidades.equalsIgnoreCase("Novo")) {
+					Produto novoproduto = new Produto();
+					loja.produtos.add(novoproduto);
+				}
+				else if(funcionalidades.equalsIgnoreCase("Existente")) {
+				loja.aumentarestoque(loja.buscarproduto());				
 				}
 				
 			}
-		}
-		else if(funcionalidades.equalsIgnoreCase("Alterar Dados")) {
-			System.out.println("Grupo || Modelo || Identificaçao || Marca || Localizaçao || Custo de Entrada || Custo de Saida || Quantidade Atual || Estoque Minimo");
-			funcionalidades = teclado.nextLine();
-			if(funcionalidades.equalsIgnoreCase("Grupo")) {
-				loja.buscaproduto().setGrupo(teclado.nextLine());
-			}
-			else if(funcionalidades.equalsIgnoreCase("Modelo")) {
-				loja.buscaproduto().setModelo(teclado.nextLine());
-			}
-			else if(funcionalidades.equalsIgnoreCase("Identificaçao")) {
-				loja.buscaproduto().setGrupo(teclado.nextLine());
-			}
-			else if(funcionalidades.equalsIgnoreCase("Marca")) {
-				loja.buscaproduto().setMarca(teclado.nextLine());
-			}
-			else if(funcionalidades.equalsIgnoreCase("Localizaçao")) {
-				loja.buscaproduto().setLocalizaçao(teclado.nextLine());
-			}
-			else if(funcionalidades.equalsIgnoreCase("Custo de Entrada")) {
-				loja.buscaproduto().setCustodeentrada(teclado.nextDouble());
-			}
-			else if(funcionalidades.equalsIgnoreCase("Custo de Saida")) {
-				loja.buscaproduto().setCustodesaida(teclado.nextDouble());
-			}
-			else if(funcionalidades.equalsIgnoreCase("Quantidade Atual")) {
-				loja.buscaproduto().setGrupo(teclado.nextLine());
-			}
-			else if(funcionalidades.equalsIgnoreCase("Estoque Minimo")) {
-				loja.buscaproduto().setGrupo(teclado.nextLine());
-			}
-		}
-		
-		else if(funcionalidades.equalsIgnoreCase("Relatorio")) {
 			
+			else if(funcionalidades.equalsIgnoreCase("Alterar Dados")) {
+				loja.alterardados(loja.buscarproduto());
+			}
+			
+			else if(funcionalidades.equalsIgnoreCase("Consultar Produto")) {
+				
+				Produto consultado = loja.buscarproduto();
+				if(consultado != null) {
+					consultado.MostrarDados();				
+				}
+				else {
+					System.out.println("Produto não existente.");
+				}			
+			}
+			
+			else if(funcionalidades.equalsIgnoreCase("Perda de Produto")) {
+				loja.produtoperdido(loja.buscarproduto());
+			}
+		
+			else if(funcionalidades.equalsIgnoreCase("Realizar Venda")) {
+				loja.realizarvenda(loja.buscarproduto());
+			}
+		
+			else if(funcionalidades.equalsIgnoreCase("Relatorio")) {
+				loja.relatorio();
+			}
 		}
 	}
-
 }
