@@ -28,7 +28,7 @@ public class Produto {
 		this.custodesaida = teclado.nextDouble();
 		System.out.println("Unidades:");
 		this.quantidadeatual = teclado.nextInt();
-		System.out.println("Identificação:");
+		System.out.println("Código:");
 		this.codigo = teclado.nextInt();
 		System.out.println("Estoque Mínimo:");
 		this.estoqueminimo = teclado.nextInt();
