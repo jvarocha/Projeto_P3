@@ -18,10 +18,10 @@ public class Loja {
 	}
 	
 	public Produto buscarproduto() {
-		System.out.println("Digite o identificação do Produto:");
+		System.out.println("Digite o Código do Produto:");
 		int identificaçao = teclado.nextInt();
 		for(Produto procurar : produtos) {
-			System.out.println(procurar.getCodigo());
+			
 			if(procurar.getCodigo() == identificaçao) {
 				return procurar;
 			}
@@ -154,4 +154,4 @@ public class Loja {
 			}
 		}
 	}
-}
+} 
