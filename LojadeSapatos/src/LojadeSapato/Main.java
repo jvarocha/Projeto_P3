@@ -8,7 +8,6 @@ public class Main {
 	static String funcionalidades;
 	private static Loja loja = new Loja();
 	public static void main(String[] args) {		
-		Scanner teclado = new Scanner(System.in);
 		System.out.println("Acessar Conta || Criar Usuário");
 		funcionalidades = teclado.nextLine();
 		while(funcionalidades.equalsIgnoreCase("Fechar") != true) {
@@ -36,11 +35,10 @@ public class Main {
 				System.out.println("Novo || Existente");
 				funcionalidades = teclado.nextLine();
 				if(funcionalidades.equalsIgnoreCase("Novo")) {
-					Produto novoproduto = new Produto();
-					loja.produtos.add(novoproduto);
+					loja.entradaproduto();
 				}
 				else if(funcionalidades.equalsIgnoreCase("Existente")) {
-				loja.aumentarestoque(loja.buscarproduto());				
+					loja.aumentarestoque(loja.buscarproduto());				
 				}
 				
 			}
