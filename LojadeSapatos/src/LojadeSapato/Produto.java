@@ -60,8 +60,7 @@ public class Produto {
 	}
 	public void setLocalizaçao(String localizaçao) {
 		this.localizaçao = localizaçao;
-	}
-	
+	}	
 	public int getCodigo() {
 		return codigo;
 	}
