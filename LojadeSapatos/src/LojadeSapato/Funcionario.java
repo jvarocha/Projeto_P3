@@ -12,7 +12,7 @@ public class Funcionario {
 		this.nome = teclado.nextLine();
 		System.out.println("Login:");
 		this.login = teclado.nextLine();
-		System.out.println("senha:");
+		System.out.println("Senha:");
 		this.senha = teclado.nextLine();
 	}
 	public String getLogin() {
@@ -34,5 +34,4 @@ public class Funcionario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 }
