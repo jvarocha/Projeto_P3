@@ -41,7 +41,7 @@ public class Produto {
 				   "\nModelo: " + this.modelo +
 				   "\nPratileira: " + this.localizaçao +
 				   "\nPreço: " + this.custodesaida +
-					"\nUnidades: " + this.quantidadeatual);
+				   "\nUnidades: " + this.quantidadeatual);
 	}
 	public String getMarca() {
 		return marca;
