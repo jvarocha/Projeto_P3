@@ -14,18 +14,15 @@ public class Loja {
 	}
 	
 	public void saidaproduto() {
-		produtos.remove(buscaproduto());
+		produtos.remove(buscarproduto());
 	}
 	
-	public void consutarprodutor() {
-		System.out.println(buscaproduto().getIdentificaçao());
-	}
-	
-	public Produto buscaproduto() {
+	public Produto buscarproduto() {
 		System.out.println("Digite o identificação do Produto:");
 		int identificaçao = teclado.nextInt();
 		for(Produto procurar : produtos) {
-			if(procurar.getIdentificaçao() == identificaçao) {
+			System.out.println(procurar.getCodigo());
+			if(procurar.getCodigo() == identificaçao) {
 				return procurar;
 			}
 		}
@@ -58,19 +55,103 @@ public class Loja {
 		return null;
 	}
 	
-	public void aumentarestoque() {
-		
+	public void aumentarestoque(Produto produto) {
+		if(produto != null) {
+			System.out.println("Quantidade Atual: "+produto.getQuantidadeatual()+"\nLimite Máximo: "+produto.getEstoquemaximo());
+			System.out.println("Deseja adicionar quantos pares:");
+			int acrescimo = teclado.nextInt();
+			if(acrescimo + produto.getQuantidadeatual() > produto.getEstoquemaximo()) {
+				System.out.println("Esse valor excedi o limite máximo !");
+			}
+			else {
+				produto.setQuantidadeatual(acrescimo + produto.getQuantidadeatual());				
+			}
+		}
 	}
 	
 	public void relatorio(){
-		System.out.println("Geral ou Individual");
-		funcionalidades = teclado.nextLine();
-		if(funcionalidades.equalsIgnoreCase("Geral")) {
+		for(Produto produto: produtos) {
 			
-		}
-		else if(funcionalidades.equalsIgnoreCase("Individual")) {
-			
+				System.out.println("\nCódigo: " + produto.getCodigo() +
+								"\nMarca: " + produto.getMarca() +	
+								"\nModelo: " + produto.getModelo() +
+								"\nEstoque Mínimo: " + produto.getEstoqueminimo() +
+								"\nEstoque Máximo: " + produto.getEstoquemaximo() +
+								"\nEstoque Atual: " + produto.getQuantidadeatual() +
+								"\nCompras: Mensal:" + produto.getCustodeentrada() +
+								"\nValor de Venda: " + produto.getCustodesaida() +
+								"\nUnidades Vendidas: " + produto.getUnidadesvendidas() +
+								"\nVendas Mensal: " + produto.getVendasmensal());
+			}
+	}
+	
+	public void realizarvenda(Produto produto) {
+		if(produto != null) {
+			System.out.println("Unidades:");
+			int unidadesvendidas = teclado.nextInt();
+			if(produto.getQuantidadeatual()-unidadesvendidas >= 0) {
+				produto.setVendasmensal(produto.getCustodesaida()*unidadesvendidas);
+				produto.setQuantidadeatual(produto.getQuantidadeatual()-unidadesvendidas);
+				produto.setUnidadesvendidas(produto.getUnidadesvendidas()+unidadesvendidas);
+			}
+			else {
+				System.out.println("Não há estoque suficiente !");
+			}
 		}
 	}
 	
+	public void alterardados(Produto produto) {
+		System.out.println("Modelo || Identificaçao || Marca || Localizaçao || Custo de Entrada || Custo de Saida || Quantidade Atual || Estoque Minimo || Estoque Maximo || Voltar");
+		funcionalidades = teclado.nextLine();
+		if(funcionalidades.equalsIgnoreCase("Modelo")) {
+			System.out.println("Para:");
+			produto.setModelo(teclado.nextLine());
+		}
+		else if(funcionalidades.equalsIgnoreCase("Identificaçao")) {
+			System.out.println("Para:");
+			produto.setCodigo(teclado.nextInt());
+		}
+		else if(funcionalidades.equalsIgnoreCase("Marca")) {
+			System.out.println("Para:");
+			produto.setMarca(teclado.nextLine());
+		}
+		else if(funcionalidades.equalsIgnoreCase("Localizaçao")) {
+			System.out.println("Para:");
+			produto.setLocalizaçao(teclado.nextLine());
+		}
+		else if(funcionalidades.equalsIgnoreCase("Custo de Entrada")) {
+			System.out.println("Para:");
+			produto.setCustodeentrada(teclado.nextDouble());
+		}
+		else if(funcionalidades.equalsIgnoreCase("Custo de Saida")) {
+			System.out.println("Para:");
+			produto.setCustodesaida(teclado.nextDouble());
+		}
+		else if(funcionalidades.equalsIgnoreCase("Quantidade Atual")) {
+			System.out.println("Para:");
+			aumentarestoque(produto);
+		}
+		else if(funcionalidades.equalsIgnoreCase("Estoque Minimo")) {
+			System.out.println("Para:");
+			produto.setEstoqueminimo(teclado.nextInt());
+		}
+		else if(funcionalidades.equalsIgnoreCase("Estoque Maximo")) {
+			System.out.println("Para:");
+			produto.setEstoquemaximo(teclado.nextInt());
+		}	
+	}
+	
+	public void produtoperdido(Produto produto) {
+		if(produto != null) {
+			System.out.println("Unidades:");
+			int unidadesperdidas = teclado.nextInt();
+			if(produto.getQuantidadeatual()-unidadesperdidas >= 0) {
+				produto.setQuantidadeatual(produto.getQuantidadeatual()-unidadesperdidas);
+				produto.setVendasmensal(-(unidadesperdidas*produto.getCustodesaida()));
+			}
+			else {
+				System.out.println("Houve algum erro!");
+			}
+		}
+	}
 }
