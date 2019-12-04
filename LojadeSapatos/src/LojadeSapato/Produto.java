@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public class Produto {
 	Scanner teclado = new Scanner(System.in);
-	private String grupo;
-	private int identificaçao;
+	private int codigo;
 	private String marca;
 	private String modelo;
 	private String localizaçao;
@@ -14,39 +13,35 @@ public class Produto {
 	private int quantidadeatual;
 	private int estoqueminimo;
 	private int estoquemaximo;
+	private int unidadesvendidas;
+	private double vendasmensal;	
 	public Produto() {
-		System.out.println("Grupo:");
-		this.grupo = teclado.nextLine();
 		System.out.println("Marca:");
 		this.marca = teclado.nextLine();
 		System.out.println("Modelo:");
 		this.modelo = teclado.nextLine();
-		System.out.println("Localização:");
+		System.out.println("Localização(Pratileira):");
 		this.localizaçao = teclado.nextLine();
 		System.out.println("Custo de Entrada:");
 		this.custodeentrada = teclado.nextDouble();
-		System.out.println("Custo de Saída:");
+		System.out.println("Custo de venda (individual):");
 		this.custodesaida = teclado.nextDouble();
-		System.out.println("Custo de Quantidade:");
+		System.out.println("Unidades:");
 		this.quantidadeatual = teclado.nextInt();
+		System.out.println("Identificação:");
+		this.codigo = teclado.nextInt();
 		System.out.println("Estoque Mínimo:");
 		this.estoqueminimo = teclado.nextInt();
 		System.out.println("Estoque Máximo:");
 		this.estoquemaximo = teclado.nextInt();
 	}
 	public void MostrarDados() {
-		System.out.println( "\nGrupo:" + this.grupo +
-				   "\nIdentificação: " + this.identificaçao +
+		System.out.println( "\nCodigo: " + this.codigo +
 				   "\nMarca: " + this.marca +
-				   "\nModelo:" + this.modelo +
-				   "\nLocal:" + this.localizaçao +
-				   "\nPreço" + this.custodesaida);
-	}
-	public String getGrupo() {
-		return grupo;
-	}
-	public void setGrupo(String grupo) {
-		this.grupo = grupo;
+				   "\nModelo: " + this.modelo +
+				   "\nPratileira: " + this.localizaçao +
+				   "\nPreço: " + this.custodesaida +
+					"\nUnidades: " + this.quantidadeatual);
 	}
 	public String getMarca() {
 		return marca;
@@ -67,11 +62,11 @@ public class Produto {
 		this.localizaçao = localizaçao;
 	}
 	
-	public int getIdentificaçao() {
-		return identificaçao;
+	public int getCodigo() {
+		return codigo;
 	}
-	public void setIdentificaçao(int identificaçao) {
-		this.identificaçao = identificaçao;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	public int getEstoqueminimo() {
 		return estoqueminimo;
@@ -94,7 +89,7 @@ public class Produto {
 	public void setCustodesaida(double custodesaida) {
 		this.custodesaida = custodesaida;		
 	}
-	public Double setCustodesaida() {
+	public Double getCustodesaida() {
 		return custodesaida;		
 	}
 	public int getEstoquemaximo() {
@@ -102,5 +97,17 @@ public class Produto {
 	}
 	public void setEstoquemaximo(int estoquemaximo) {
 		this.estoquemaximo = estoquemaximo;
+	}
+	public int getUnidadesvendidas() {
+		return unidadesvendidas;
+	}
+	public void setUnidadesvendidas(int unidadesvendidas) {
+		this.unidadesvendidas = unidadesvendidas;
+	}
+	public double getVendasmensal() {
+		return vendasmensal;
+	}
+	public void setVendasmensal(double vendasmensal) {
+		this.vendasmensal = vendasmensal;
 	}
 }
