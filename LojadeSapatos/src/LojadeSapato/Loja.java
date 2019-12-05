@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Loja {
 	ArrayList<Produto> produtos = new ArrayList<>();
 	ArrayList<Funcionario> funcionarios = new ArrayList<>();
-	Proprietario dono = new Proprietario();
+	Gerente dono = new Gerente();
 	Scanner teclado = new Scanner(System.in);
 	String funcionalidades;
 	public void entradaproduto() {
