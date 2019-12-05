@@ -6,11 +6,14 @@ import java.util.Scanner;
 public class Loja {
 	ArrayList<Produto> produtos = new ArrayList<>();
 	ArrayList<Funcionario> funcionarios = new ArrayList<>();
+	Proprietario dono = new Proprietario();
 	Scanner teclado = new Scanner(System.in);
 	String funcionalidades;
 	public void entradaproduto() {
 		Produto novoproduto = new Produto();
-		produtos.add(novoproduto);
+		if(novoproduto.getCodigo() != -1) {
+			produtos.add(novoproduto);
+		}
 	}
 	
 	public void saidaproduto() {
@@ -21,7 +24,6 @@ public class Loja {
 		System.out.println("Digite o Código do Produto:");
 		int identificaçao = teclado.nextInt();
 		for(Produto procurar : produtos) {
-			
 			if(procurar.getCodigo() == identificaçao) {
 				return procurar;
 			}
@@ -29,18 +31,25 @@ public class Loja {
 		return null;
 	}
 	
-	public Funcionario buscafuncionario() {
-		System.out.println("Digite o Nome:");
-		String nome = teclado.nextLine();
-		for(Funcionario procurar : funcionarios) {
-			if(procurar.getNome() == nome) {
-				return procurar;
+	public void demitir() {
+		System.out.println("Login:");
+		String login = teclado.nextLine();
+		if(dono.getLogin().equals(login)) {
+			System.out.println("Senha:");
+			String senha = teclado.nextLine();
+			if(dono.getSenha().equals(senha)) {
+				System.out.println("Nome do Funcionário:");
+				String nome = teclado.nextLine();
+				for(Funcionario procurar: funcionarios)
+					if(procurar.getNome().equals(nome)) {
+						System.out.println("O "+ nome +" acaba de ser demitido.");
+						funcionarios.remove(procurar);
+					}
 			}
 		}
-		return null;
 	}
 	
-	public Funcionario acessarconta() {
+	public Object acessarconta() {
 		System.out.println("Login:");
 		String login = teclado.nextLine();
 		for(Funcionario procurar : funcionarios) {
@@ -50,6 +59,13 @@ public class Loja {
 				if(procurar.getSenha().equals(senha)) {
 					return procurar;
 				}
+			}
+		}
+		if(dono.getLogin().equals(login)) {
+			System.out.println("Senha:");
+			String senha = teclado.nextLine();
+			if(dono.getSenha().equals(senha)) {
+				return dono;
 			}
 		}
 		return null;
@@ -154,4 +170,5 @@ public class Loja {
 			}
 		}
 	}
-} 
+	
+}
