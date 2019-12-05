@@ -1,6 +1,5 @@
 package LojadeSapato;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -17,8 +16,11 @@ public class Main {
 				}
 			}
 			if(funcionalidades.equalsIgnoreCase("Criar Usuario")) {
-				loja.funcionarios.add(new Funcionario());
-				operaçoes();
+				Funcionario novofuncionario = new Funcionario();
+				if(novofuncionario.getNome().equalsIgnoreCase("-1")) {
+					loja.funcionarios.add(novofuncionario);
+					operaçoes();
+				}
 			}
 			System.out.println("Acessar Conta || Criar Usuário || Fechar");
 			funcionalidades = teclado.nextLine();
@@ -28,9 +30,12 @@ public class Main {
 	public static void operaçoes() {
 		while(funcionalidades.equalsIgnoreCase("voltar") != true) {
 			
-			System.out.println("Entrada de Produto || Perda de Produto || Consultar Produto || Realizar Venda || Relatório || Alterar Dados");
+			System.out.println("Entrada de Produto || Perda de Produto || Consultar Produto || Realizar Venda || Relatório || Alterar Dados || Demitir Funcionario");
 			funcionalidades = teclado.nextLine();
-			if(funcionalidades.equalsIgnoreCase("Entrada de Produto")) {
+			if(funcionalidades.equalsIgnoreCase("Demitir Funcionario")) {
+				loja.demitir();				
+			}
+			else if(funcionalidades.equalsIgnoreCase("Entrada de Produto")) {
 				
 				System.out.println("Novo || Existente");
 				funcionalidades = teclado.nextLine();
@@ -38,7 +43,7 @@ public class Main {
 					loja.entradaproduto();
 				}
 				else if(funcionalidades.equalsIgnoreCase("Existente")) {
-					loja.aumentarestoque(loja.buscarproduto());				
+				loja.aumentarestoque(loja.buscarproduto());				
 				}
 				
 			}
